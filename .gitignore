@@ -1,0 +1,16 @@
+# Local .terraform directories
+**/.terraform/*
+
+# Compiled Terraform configurations
+**/*.tfstate
+**/*.tfstate.*
+**/*.tfplan
+
+# Custom variables
+terraform.tfvars
+!sample.terraform.tfvars
+
+# Sensitive data
+id*
+id*.pub
+*.pem
