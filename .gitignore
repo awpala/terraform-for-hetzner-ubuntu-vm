@@ -7,7 +7,7 @@
 **/*.tfplan
 
 # Custom variables
-terraform.tfvars
+*.tfvars*
 !sample.terraform.tfvars
 
 # Sensitive data
