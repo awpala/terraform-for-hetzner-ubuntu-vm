@@ -154,7 +154,7 @@ resource "hcloud_server" "ubuntu_server" {
       "sudo -H -u ${var.nonroot_user} bash -c 'mkdir -p /home/${var.nonroot_user}/.ssh && chmod 700 /home/${var.nonroot_user}/.ssh'",
 
       # Generate SSH key pair for user
-      "sudo -H -u ${var.nonroot_user} ssh-keygen -t ed25519 -C '${var.nonroot_user_email}' -N '' -f /home/${var.nonroot_user}/.ssh/ed25519",
+      "sudo -H -u ${var.nonroot_user} ssh-keygen -t ed25519 -C '${var.nonroot_user_email}' -N '' -f /home/${var.nonroot_user}/.ssh/id_ed25519",
 
       # Insert SSH public key into authorized_keys file
       "sudo -H -u ${var.nonroot_user} bash -c 'echo \"${var.ssh_public_key}\" >> /home/${var.nonroot_user}/.ssh/authorized_keys'",
@@ -164,7 +164,11 @@ resource "hcloud_server" "ubuntu_server" {
     ]
   }
 
-  # add bash profile for user
+  # add bash profile for root and user
+  provisioner "file" {
+    source = "${path.module}/.bashrc"
+    destination = "/root/.bashrc"
+  }
   provisioner "file" {
     source = "${path.module}/.bashrc"
     destination = "/home/${var.nonroot_user}/.bashrc"
@@ -172,9 +176,17 @@ resource "hcloud_server" "ubuntu_server" {
 
   provisioner "file" {
     source = "${path.module}/.bash_aliases"
+    destination = "/root/.bash_aliases"
+  }
+  provisioner "file" {
+    source = "${path.module}/.bash_aliases"
     destination = "/home/${var.nonroot_user}/.bash_aliases"
   }
 
+  provisioner "file" {
+    source = "${path.module}/.profile"
+    destination = "/root/.profile"
+  }
   provisioner "file" {
     source = "${path.module}/.profile"
     destination = "/home/${var.nonroot_user}/.profile"
