@@ -193,15 +193,14 @@ resource "hcloud_server" "ubuntu_server" {
   }
 }
 
-# Hetzner - provision volume and mount/attach it to server
-
-# Set up volume and mount it to the server at location `/mnt/<volume_name>`
+# Hetzner - provision volume and mount/attach it to the server at location `/mnt/<volume_name>`
 resource "hcloud_volume" "data_volume" {
   name      = var.volume_name
   size      = var.volume_size
   server_id = hcloud_server.ubuntu_server.id
 }
 
+# alias server id to use in volume mounting configs
 data "hcloud_server" "ubuntu_server" {
   id = hcloud_server.ubuntu_server.id
 }
@@ -210,7 +209,7 @@ data "hcloud_server" "ubuntu_server" {
 resource "null_resource" "mount_volume" {
   depends_on = [hcloud_volume.data_volume]
 
-  # add trigger to launch after server is set up
+  # add trigger in order to mount the volume to the server post-launch of server
   triggers = {
     timestamp = timestamp()
   }
@@ -225,6 +224,7 @@ resource "null_resource" "mount_volume" {
     private_key     = file("id_ed25519")
   }
 
+  # these commands are provided by Hetzner on Volume creation in order to mount the volume into a server(s)
   provisioner "remote-exec" {
     inline = [
       "sudo mkfs.ext4 /dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data_volume.id}",
