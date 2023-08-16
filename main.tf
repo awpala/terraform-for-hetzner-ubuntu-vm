@@ -30,17 +30,17 @@ variable "server_name" {
 }
 
 variable "server_image" {
-  description = "Hetzner server image"
+  description = "Hetzner server image. See https://docs.hetzner.com/robot/dedicated-server/operating-systems/standard-images/ for options."
   default     = "ubuntu-22.04"
 }
 
 variable "server_location" {
-  description = "Hetzner server location"
+  description = "Hetzner server location. See https://docs.hetzner.com/cloud/general/locations/ for options."
   default     = "ash"
 }
 
 variable "server_type" {
-  description = "Hetzner server type"
+  description = "Hetzner server type. See https://docs.hetzner.com/cloud/servers/overview/ for options."
   default     = "cpx11"
 }
 
@@ -50,7 +50,7 @@ variable "volume_name" {
 }
 
 variable "volume_size" {
-  description = "Size of the volume in GB"
+  description = "Size of the volume in GB. See https://docs.hetzner.com/cloud/volumes/overview for options."
   default     = 10
 }
 

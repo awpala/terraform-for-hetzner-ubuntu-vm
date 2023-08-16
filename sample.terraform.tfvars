@@ -6,13 +6,13 @@ hetzner_project_id = <custom-value>
 
 # Hetzner resource - server
 server_name = <custom-value>
-server_image = <value-from-hetzner>
-server_location = <value-from-hetzner> # ref: https://docs.hetzner.com/cloud/general/locations/
-server_type = <value-from-hetzner>
+server_image = <value-from-hetzner> # default "ubuntu-22.04" if omitted | ref: https://docs.hetzner.com/robot/dedicated-server/operating-systems/standard-images/
+server_location = <value-from-hetzner> # default "ash" if omitted | ref: https://docs.hetzner.com/cloud/general/locations/
+server_type = <value-from-hetzner> # default "cpx11" if omitted | ref: https://docs.hetzner.com/cloud/servers/overview/
 
 # Hetzner resource - volume
 volume_name = <custom-value>
-volume_size = <value-from-hetzner-within-valid-range>
+volume_size = <value-from-hetzner-within-valid-range> # default 10 (GB) if omitted | ref: https://docs.hetzner.com/cloud/volumes/overview
 
 # Non-root user settings 
 nonroot_user_group = <custom-value>
