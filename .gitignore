@@ -14,3 +14,7 @@
 id*
 id*.pub
 *.pem
+
+# Terraform executable
+terraform
+terraform.exe
