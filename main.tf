@@ -161,6 +161,9 @@ resource "hcloud_server" "ubuntu_server" {
 
       # Initialize files for user's bash profile
       "sudo -H -u ${var.nonroot_user} bash -c 'touch /home/${var.nonroot_user}/.bashrc /home/${var.nonroot_user}/.bash_aliases /home/${var.nonroot_user}/.profile'",
+
+      # Install Docker VS Code extension in server
+      "code --install-extension ms-azuretools.vscode-docker",
     ]
   }
 
