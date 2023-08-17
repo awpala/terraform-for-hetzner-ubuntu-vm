@@ -2,7 +2,7 @@
 # Variables Declarations
 ##
 
-# Hetzner access and authentication
+# Hetzner access and authentication -- uncomment `sensitive = true` to obscure values in terraform CLI outputs
 variable "hetzner_api_token" {
   description = "Hetzner API token"
   type        = string
