@@ -239,8 +239,11 @@ resource "null_resource" "mount_volume" {
   # these commands are provided by Hetzner on Volume creation in order to mount the volume into a server(s)
   provisioner "remote-exec" {
     inline = [
+      # format volume
       "sudo mkfs.ext4 /dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data_volume.id}",
+      # mount volume
       "sudo mount /dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data_volume.id} /mnt/${var.volume_name}",
+      # add volume to fstab
       "sudo echo '/dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data_volume.id} /mnt/${var.volume_name} ext4 defaults 0 0' | sudo tee -a /etc/fstab",
     ]
   }
