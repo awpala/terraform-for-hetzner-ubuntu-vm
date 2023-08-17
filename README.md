@@ -40,7 +40,7 @@ cd terraform-for-hetzner-ubuntu-vm
 | `"server_type"` | `"cpx11"` | (N/A) | https://docs.hetzner.com/cloud/servers/overview/ |
 | `"volume_size"` | `10` | GB | https://docs.hetzner.com/cloud/volumes/overview/ |
 
-7. Run the following command to update dependencies if necessary (this will correspondingly modify lockfile `.terraform.lock.hcl`, as well as generate dependencies in local directory `/.terraform`):
+7. Run the following command to update dependencies (this will correspondingly modify lockfile `.terraform.lock.hcl` if necessary via flag `--upgrade`, as well as generate dependencies in local directory `/.terraform/`):
 
 ```bash
 ./terraform init --upgrade
