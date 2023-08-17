@@ -5,6 +5,7 @@
 # Hetzner access and authentication
 variable "hetzner_api_token" {
   description = "Hetzner API token"
+  type        = string
   sensitive   = true
 }
 
@@ -22,57 +23,68 @@ variable "ssh_key_name_hetzner" {
 
 variable "hetzner_project_id" {
   description = "Hetzner project ID"
+  type        = string
 }
 
 # Hetzner resource - server
 variable "server_name" {
   description = "Hetzner server name"
+  type        = string
 }
 
 variable "server_image" {
   description = "Hetzner server image. See https://docs.hetzner.com/robot/dedicated-server/operating-systems/standard-images/ for options."
   default     = "ubuntu-22.04"
+  type        = string
 }
 
 variable "server_location" {
   description = "Hetzner server location. See https://docs.hetzner.com/cloud/general/locations/ for options."
   default     = "ash"
+  type        = string
 }
 
 variable "server_type" {
   description = "Hetzner server type. See https://docs.hetzner.com/cloud/servers/overview/ for options."
   default     = "cpx11"
+  type        = string
 }
 
 # Hetzner resource - volume
 variable "volume_name" {
   description = "Name of the volume"
+  type        = string
 }
 
 variable "volume_size" {
   description = "Size of the volume in GB. See https://docs.hetzner.com/cloud/volumes/overview for options."
   default     = 10
+  type        = number
 }
 
 # Non-root user settings -- uncomment `sensitive = true` to obscure values in terraform CLI outputs
 variable "nonroot_user" {
   description = "Name for the nonroot user"
+  type        = string
   # sensitive   = true
 }
 
 variable "nonroot_user_group" {
   description = "Group for the nonroot user"
+  type        = string
   # sensitive   = true
 }
 
 variable "nonroot_user_password" {
   description = "Password for the nonroot user"
+  type        = string
   # sensitive   = true
 }
 
 variable "nonroot_user_email" {
   description = "Email address for the nonroot user"
   default     = "gpb@gatech.edu"
+  type        = string
   # sensitive   = true
 }
 
