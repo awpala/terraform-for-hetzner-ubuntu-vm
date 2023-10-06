@@ -15,6 +15,7 @@ alias dvc-ad='dvc apps-and-dbs-data'
 alias dn='docker network'
 alias dnc='dn create'
 alias dnc-ad='dnc apps-and-dbs-network'
+alias dul="docker images | grep -v REPOSITORY | awk '{print \$1}' | xargs -L1 docker pull" # update all existing images to tag `:latest` -- ref: https://www.googlinux.com/how-to-update-all-docker-images/
 
 # VM memory management -- ref: https://askubuntu.com/a/1280347
 alias free-ram='sync && echo 3 | sudo tee /proc/sys/vm/drop_caches***'
