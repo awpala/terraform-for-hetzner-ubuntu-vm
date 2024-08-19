@@ -13,7 +13,8 @@ Configurations are given in `main.tf`. Furthermore, user-specified values are li
 
 ## Instructions
 
-***N.B.*** These instructions assume a Unix-like terminal and executable (i.e., `terraform`, paths `/path/to/file`, etc.). For Windows host systems, make corresponding adjustments (e.g., executable `terraform.exe` rather than Unix-like `terraform`, Windows-style paths, etc.) and/or use an appropriate Unix-based terminal application for Windows (e.g., [Git Bash](https://gitforwindows.org/)).
+> [!NOTE]
+> These instructions assume a Unix-like terminal and executable (i.e., `terraform`, paths `/path/to/file`, etc.). For Windows host systems, make corresponding adjustments (e.g., executable `terraform.exe` rather than Unix-like `terraform`, Windows-style paths, etc.) and/or use an appropriate Unix-based terminal application for Windows (e.g., [Git Bash](https://gitforwindows.org/)).
 
 1. Clone this repo locally as follows and change into it:
 
