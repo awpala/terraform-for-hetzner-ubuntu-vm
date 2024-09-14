@@ -111,7 +111,7 @@ resource "hcloud_server" "ubuntu_server" {
   server_type = var.server_type
   image       = var.server_image
   location    = var.server_location
-  ssh_keys = [var.ssh_key_name_hetzner]
+  ssh_keys    = [var.ssh_key_name_hetzner]
 
   connection {
     type            = "ssh"
@@ -155,7 +155,7 @@ resource "hcloud_server" "ubuntu_server" {
       # Set user's shell to `bash`
       "sudo chsh -s /bin/bash ${var.nonroot_user}",
 
-      # Initialize volume directory (mounted in subsequent resource setup step at the end of this config file)
+      # Initialize volume directory (auto-mounted in subsequent resource setup step for the attached volume)
       "sudo mkdir -p /mnt/${var.volume_name}",
 
       # Set ownership and permissions for user's home directory and volume mount
@@ -207,44 +207,11 @@ resource "hcloud_server" "ubuntu_server" {
 
 # Hetzner - provision volume and mount/attach it to the server at location `/mnt/<volume_name>`
 resource "hcloud_volume" "data_volume" {
+  depends_on = [hcloud_server.ubuntu_server]
+
   name      = var.volume_name
   size      = var.volume_size
   server_id = hcloud_server.ubuntu_server.id
-}
-
-# alias server id to use in volume mounting configs
-data "hcloud_server" "ubuntu_server" {
-  id = hcloud_server.ubuntu_server.id
-}
-
-# Create the volume and mount it to server
-resource "null_resource" "mount_volume" {
-  depends_on = [hcloud_volume.data_volume]
-
-  # add trigger in order to mount the volume to the server post-launch of server
-  triggers = {
-    timestamp = timestamp()
-  }
-
-  connection {
-    type            = "ssh"
-    user            = "root"
-    host            = hcloud_server.ubuntu_server.ipv4_address
-    timeout         = "1m"
-    agent           = false
-    target_platform = "unix"
-    private_key     = file("id_ed25519")
-  }
-
-  # these commands are provided by Hetzner on Volume creation in order to mount the volume into a server(s)
-  provisioner "remote-exec" {
-    inline = [
-      # format volume
-      "sudo mkfs.ext4 /dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data_volume.id}",
-      # mount volume
-      "sudo mount /dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data_volume.id} /mnt/${var.volume_name}",
-      # add volume to fstab
-      "sudo echo '/dev/disk/by-id/scsi-0HC_Volume_${hcloud_volume.data_volume.id} /mnt/${var.volume_name} ext4 defaults 0 0' | sudo tee -a /etc/fstab",
-    ]
-  }
+  automount = true
+  format    = "ext4"
 }
