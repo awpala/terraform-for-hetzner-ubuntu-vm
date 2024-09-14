@@ -207,11 +207,11 @@ resource "hcloud_server" "ubuntu_server" {
 
 # Hetzner - provision volume and mount/attach it to the server at location `/mnt/<volume_name>`
 resource "hcloud_volume" "data_volume" {
-  depends_on = [hcloud_server.ubuntu_server]
-
   name      = var.volume_name
   size      = var.volume_size
   server_id = hcloud_server.ubuntu_server.id
   automount = true
   format    = "ext4"
+
+  depends_on = [hcloud_server.ubuntu_server]
 }
