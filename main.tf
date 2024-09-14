@@ -34,7 +34,7 @@ variable "server_name" {
 
 variable "server_image" {
   description = "Hetzner server image. See https://docs.hetzner.com/robot/dedicated-server/operating-systems/standard-images/ for options."
-  default     = "ubuntu-22.04"
+  default     = "ubuntu-24.04"
   type        = string
 }
 

@@ -3,7 +3,7 @@
 ## Overview
 
 This repo contains configurations for provisioning cloud resources in [Hetzner](https://www.hetzner.com/) using [Terraform](https://www.terraform.io/). Specifically, the following resources will be provisioned:
-  * A Hetzner **server** running Linux Ubuntu OS 22.04 LTS
+  * A Hetzner **server** running Linux Ubuntu OS 24.04 LTS
     * Both `root` user and a custom-specified non-`root` user present on provisioning
     * Reference/starter bash profile present on provisioning
   * A Hetzner **volume**, attached to the server
