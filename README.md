@@ -37,7 +37,7 @@ cd terraform-for-hetzner-ubuntu-vm
 
 | Variable Name | Default Value | Unit of Measure | Reference |
 |:--:|:--:|:--:|:--:|
-| `"server_image"` | `"ubuntu-22.04"` | (N/A) | https://docs.hetzner.com/robot/dedicated-server/operating-systems/standard-images/ |
+| `"server_image"` | `"ubuntu-24.04"` | (N/A) | https://docs.hetzner.com/robot/dedicated-server/operating-systems/standard-images/ |
 | `"server_location"` | `"ash"` | (N/A) | https://docs.hetzner.com/cloud/general/locations/ |
 | `"server_type"` | `"cpx11"` | (N/A) | https://docs.hetzner.com/cloud/servers/overview/ |
 | `"volume_size"` | `10` | GB | https://docs.hetzner.com/cloud/volumes/overview/ |
