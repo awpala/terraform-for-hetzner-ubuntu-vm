@@ -5,11 +5,11 @@
 This repo contains configurations for provisioning cloud resources in [Hetzner](https://www.hetzner.com/) using [Terraform](https://www.terraform.io/). Specifically, the following resources will be provisioned:
   * A Hetzner **server** running Linux Ubuntu OS 24.04 LTS
     * Both `root` user and a custom-specified non-`root` user present on provisioning
-    * Reference/starter bash profile present on provisioning
+    * Reference/starter bash profile present on provisioning (see `/bash-starters`)
   * A Hetzner **volume**, attached to the server
   * [Docker Engine](https://docs.docker.com/engine/) preinstalled on the server
 
-Configurations are given in `main.tf`. Furthermore, user-specified values are listed in reference file `sample.terraform.tfvars`. Also, reference/starter bash aliases are provided in file `.bash_aliases`.
+Configurations are given in `main.tf`. Furthermore, user-specified values are listed in reference file `sample.terraform.tfvars`. Also, reference/starter bash aliases are provided in file `/bash-starters/.bash_aliases`.
 
 ## Instructions
 
