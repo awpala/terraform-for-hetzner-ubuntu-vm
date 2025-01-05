@@ -129,20 +129,18 @@ resource "hcloud_server" "ubuntu_server" {
       # ref: https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
       # ref: https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
 
-      # Update package repositories
+      # Add Docker's official GPG key
       "sudo apt-get update",
-      "sudo apt-get install -y ca-certificates curl gnupg",
-
-      # Configure Docker repository key
+      "sudo apt-get install -y ca-certificates curl",
       "sudo install -m 0755 -d /etc/apt/keyrings",
-      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker-archive-keyring.gpg",
-      "sudo chmod a+r /etc/apt/keyrings/docker-archive-keyring.gpg",
+      "sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc",
+      "sudo chmod a+r /etc/apt/keyrings/docker.asc",
 
-      # Configure Docker repository
-      "echo \"deb [arch=amd64 signed-by=/etc/apt/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo \\\"$VERSION_CODENAME\\\") stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
-
-      # Install Docker and related packages
+      # Add the repository to Apt sources
+      "echo \"deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu $(. /etc/os-release && echo \\\"$VERSION_CODENAME\\\") stable\" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null",
       "sudo apt-get update",
+
+      # Install the Docker packages
       "sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin",
 
       # ------ 2) Set up nonroot user ------
