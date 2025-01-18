@@ -73,5 +73,29 @@ sudo -H -u "$NONROOT_USER_NAME" bash -c "echo \"${SSH_PUBLIC_KEY}\" >> /home/${N
 # Initialize files for user's bash profile
 sudo -H -u "$NONROOT_USER_NAME" bash -c "touch /home/${NONROOT_USER_NAME}/.bashrc /home/${NONROOT_USER_NAME}/.bash_aliases /home/${NONROOT_USER_NAME}/.profile"
 
+# ------ 3) Set up swap file ------
+
+# ref: https://repost.aws/knowledge-center/ec2-memory-swap-file
+
+log "Setting up 4 GB swapfile..."
+
+# Create 4 GB (128MB * 32) swap file on root file system
+sudo dd if=/dev/zero of=/swapfile bs=128M count=32
+
+# Update permissions of swap file
+sudo chmod 600 /swapfile
+
+# Set up a Linux swap space
+sudo mkswap /swapfile
+
+# Add swapfile to swap space and make the swap file immediately available
+sudo swapon /swapfile
+
+# Verify successful swapon
+sudo swapon -s
+
+# Configure to start swap file on boot
+sudo bash -c 'echo "/swapfile swap swap defaults 0 0" >> /etc/fstab'
+
 
 log "Hetzner server initialization completed successfully"
