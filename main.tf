@@ -95,29 +95,29 @@ resource "hcloud_server" "ubuntu_server" {
 
   # add bash profile for root and non-root user
   provisioner "file" {
-    source = "${path.module}/bash-starters/.bashrc"
+    source      = "${path.module}/bash-starters/.bashrc"
     destination = "/root/.bashrc"
   }
   provisioner "file" {
-    source = "${path.module}/bash-starters/.bashrc"
+    source      = "${path.module}/bash-starters/.bashrc"
     destination = "/home/${var.nonroot_user.name}/.bashrc"
   }
 
   provisioner "file" {
-    source = "${path.module}/bash-starters/.bash_aliases"
+    source      = "${path.module}/bash-starters/.bash_aliases"
     destination = "/root/.bash_aliases"
   }
   provisioner "file" {
-    source = "${path.module}/bash-starters/.bash_aliases"
+    source      = "${path.module}/bash-starters/.bash_aliases"
     destination = "/home/${var.nonroot_user.name}/.bash_aliases"
   }
 
   provisioner "file" {
-    source = "${path.module}/bash-starters/.profile"
+    source      = "${path.module}/bash-starters/.profile"
     destination = "/root/.profile"
   }
   provisioner "file" {
-    source = "${path.module}/bash-starters/.profile"
+    source      = "${path.module}/bash-starters/.profile"
     destination = "/home/${var.nonroot_user.name}/.profile"
   }
 }
