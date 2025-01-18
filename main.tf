@@ -118,8 +118,8 @@ resource "hcloud_server" "ubuntu_server" {
     user            = "root"
     host            = self.ipv4_address
     timeout         = "1m"
-    agent           = false
     target_platform = "unix"
+    agent           = false
     private_key     = file("id_ed25519")
   }
 
