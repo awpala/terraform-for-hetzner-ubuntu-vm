@@ -2,7 +2,7 @@
 # Variables Declarations
 ##
 
-# Hetzner resources configs -- uncomment `sensitive = true` (i.e., shown by default) in below to suppress outputs in Terraform CLI outputs
+# Hetzner resources configs -- uncomment `sensitive = true` (i.e., shown by default) in below to suppress displayed values in Terraform CLI outputs
 variable "hetzner" {
   description = "Hetzner Cloud configuration settings"
 
