@@ -20,7 +20,7 @@ variable "hetzner" {
       location = optional(string, "ash")          # Hetzner server location. See https://docs.hetzner.com/cloud/general/locations/ for options.
       type     = optional(string, "cpx11")        # Hetzner server type. See https://docs.hetzner.com/cloud/servers/overview/ for options.
     })
-    
+
     # Volume configuration
     volume = object({
       name = string               # Hetzner volume name
