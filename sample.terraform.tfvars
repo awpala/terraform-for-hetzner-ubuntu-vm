@@ -7,7 +7,7 @@ hetzner = {
 
   server = {
     name     = <custom-value>
-    image    = <value-from-hetzner> # default "ubuntu-22.04" if omitted | ref: https://docs.hetzner.com/robot/dedicated-server/operating-systems/standard-images/
+    image    = <value-from-hetzner> # default "ubuntu-24.04" if omitted | ref: https://docs.hetzner.com/robot/dedicated-server/operating-systems/standard-images/
     location = <value-from-hetzner> # default "ash" if omitted | ref: https://docs.hetzner.com/cloud/general/locations/
     type     = <value-from-hetzner> # default "cpx11" if omitted | ref: https://docs.hetzner.com/cloud/servers/overview/
   }
