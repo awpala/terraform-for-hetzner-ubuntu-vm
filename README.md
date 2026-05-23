@@ -12,6 +12,38 @@ This repo contains configurations for provisioning cloud resources in [Hetzner](
 
 Configurations are given in [`main.tf`](main.tf) and corresponding companion script [`init-server.sh`](init-server.sh) for initialization of server dependencies, configurations, etc. Furthermore, user-specified values are listed in reference file [`sample.terraform.tfvars`](sample.terraform.tfvars). Also, configurable reference/starter bash aliases are provided in file [`/bash-starters/.bash_aliases`](./bash-starters/.bash_aliases).
 
+This process is summarized diagrammatically as follows:
+
+```mermaid
+flowchart LR
+  subgraph Local["Local Host / Terraform CLI"]
+    Vars["terraform.tfvars\n(api token, project, server, volume, user)"]
+    TF["terraform apply"]
+    Script["init-server.sh"]
+    Profiles["bash-starters\n(.bashrc, .profile, .bash_aliases)"]
+    Key["id_ed25519 key pair"]
+  end
+
+  subgraph HC["Hetzner Cloud Project"]
+    API["hcloud provider API"]
+    Server["hcloud_server\nUbuntu Server VM"]
+    Init["Remote provisioning:\nDocker + non-root user + swapfile"]
+    Volume["hcloud_volume\next4 + automount"]
+    Mount["/mnt/<volume_name>"]
+  end
+
+  Vars --> TF
+  Key --> TF
+  TF --> API
+  TF -->|create| Server
+  Script -->|file provisioner| Server
+  Profiles -->|file provisioner| Server
+  TF -->|remote-exec| Init
+  Init -->|configure| Server
+  Server -->|depends_on then attach| Volume
+  Volume --> Mount
+```
+
 ## Instructions
 
 > [!NOTE]
